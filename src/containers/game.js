@@ -13,18 +13,12 @@ const Field = require('../../lib/field');
 const FieldFiller = require('../../lib/field-filler');
 const field = new Field();
 const filler = new FieldFiller();
-var playing = false;
+let playing = false;
 
 const GetProperComponent = (props) => {
 	const {onMoveListener, onConfirmListener} = props;
 	switch (props.gameStatus) {
 			case gameStatus.GAME_STATUS_PLAYING:
-				if (!playing) {
-					field.config(props);
-					field.newGame();
-					props.onSetup(field.startPosition);
-					playing = true;
-				}
 				onMoveListener();
 				return (
 					<GameWrapper 
@@ -53,7 +47,12 @@ const GetProperComponent = (props) => {
 const GameContainer = (props) => {
 		const {onExitListener} = props;
 		onExitListener();
-
+				if (!playing) {
+					field.config(props);
+					field.newGame();
+					props.onSetup(field.startPosition);
+					playing = true;
+				}
 		return (
 			<React.Fragment>
 				<GetProperComponent {...props} />

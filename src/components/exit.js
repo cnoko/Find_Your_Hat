@@ -7,8 +7,12 @@ class Exit extends React.Component {
 	render() {
 		return (
 			<Box>
-				<Text>Are you sure you want to quit?</Text>
-				<Confirm />
+				<Box width={40}>
+					<Text>Are you sure you want to quit?</Text>
+				</Box>
+				<Box width={40}>
+					<Confirm />
+				</Box>
 			</Box>
 		);
 	}

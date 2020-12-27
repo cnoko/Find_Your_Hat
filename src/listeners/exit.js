@@ -1,5 +1,6 @@
+const {INPUT_QUIT} = require('../constants/keyboard-input');
 const exitListener = (input, dispatcher) => {
-	if (input.toLowerCase() === 'q') {
+	if (input.toLowerCase() === INPUT_QUIT) {
 		dispatcher();
 	}
 }
