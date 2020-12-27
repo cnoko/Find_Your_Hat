@@ -24,5 +24,4 @@ $ find_your_hat --help
 
   Examples
     $ find_your_hat --difficulty=100
-    Hello, Jane
 ```
