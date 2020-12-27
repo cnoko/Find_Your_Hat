@@ -11,7 +11,8 @@ const NotFound = importJsx('../../src/components/not-found');
 const onExitListener    = jest.fn();
 const onMoveListener    = jest.fn();
 const onConfirmListener = jest.fn();
-const onGameOverListener = jest.fn();
+const onGameover = jest.fn();
+const onGameWin = jest.fn();
 const grid = (new Array((new Array(10).fill(0))));
 const position = {x: 0, y: 0};
 describe('Test game container', () => {
@@ -19,7 +20,8 @@ describe('Test game container', () => {
 		onExitListener.mockClear()
 		onMoveListener.mockClear();
 		onConfirmListener.mockClear();
-		onGameOverListener.mockClear();
+		onGameover.mockClear();
+		onGameWin.mockClear();
 	})
 	it('listenening', () => {
 		const {lastFrame, rerenderer} = render(
@@ -27,7 +29,8 @@ describe('Test game container', () => {
 					onExitListener={onExitListener}
 					onMoveListener={onMoveListener}
 					onConfirmListener={onConfirmListener}
-					onGameoverListener={onGameOverListener}
+					onGameover={onGameover}
+					onGameWin={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_PLAYING} 
@@ -43,7 +46,8 @@ describe('Test game container', () => {
 					onExitListener={onExitListener}
 					onMoveListener={onMoveListener}
 					onConfirmListener={onConfirmListener}
-					onGameoverListener={onGameOverListener}
+					onGameover={onGameover}
+					onGameWin={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_PLAYING} 
@@ -59,7 +63,8 @@ describe('Test game container', () => {
 					onExitListener={onExitListener}
 					onMoveListener={onMoveListener}
 					onConfirmListener={onConfirmListener}
-					onGameoverListener={onGameOverListener}
+					onGameover={onGameover}
+					onGameWin={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_OVER} 
@@ -76,7 +81,8 @@ describe('Test game container', () => {
 					onExitListener={onExitListener}
 					onMoveListener={onMoveListener}
 					onConfirmListener={onConfirmListener}
-					onGameoverListener={onGameOverListener}
+					onGameover={onGameover}
+					onGameWin={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_WIN} 
@@ -93,7 +99,8 @@ describe('Test game container', () => {
 					onExitListener={onExitListener}
 					onMoveListener={onMoveListener}
 					onConfirmListener={onConfirmListener}
-					onGameoverListener={onGameOverListener}
+					onGameover={onGameover}
+					onGameWin={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_EXIT} 
@@ -109,6 +116,7 @@ describe('Test game container', () => {
 					onExitListener={onExitListener}
 					onMoveListener={onMoveListener}
 					onConfirmListener={onConfirmListener}
+					onGameWin={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={"NOT-FOUND"} 

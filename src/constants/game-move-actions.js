@@ -1,8 +1,8 @@
-const MOVE_ACTION_UP    = 1;
-const MOVE_ACTION_DOWN  = 2;
-const MOVE_ACTION_LEFT  = 3;
-const MOVE_ACTION_RIGHT = 4;
-const NO_ACTION  = -1;
+const MOVE_ACTION_UP    = 20;
+const MOVE_ACTION_DOWN  = 21;
+const MOVE_ACTION_LEFT  = 22;
+const MOVE_ACTION_RIGHT = 23;
+const NO_ACTION  = -24;
 
 module.exports = {
 	MOVE_ACTION_UP,   

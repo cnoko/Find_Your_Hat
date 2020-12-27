@@ -2,9 +2,10 @@ const actionTypes = require('../../src/constants/game-status-actions');
 const st = require('../../src/constants/game-status');
 const {
 	exit,
-	playing,
+	playGame,
 	gameOver,
-	gameWin
+	gameWin,
+	gameResume
 } = require('../../src/actions/game-status');
 
 describe('Test game status actions', () => {
@@ -18,6 +19,10 @@ describe('Test game status actions', () => {
 		expect(gameOver().type).toBe(actionTypes.GAME_ACTION_OVER);
 	});
 	test('game action playing', () => {
-		expect(playing().type).toBe(actionTypes.GAME_ACTION_PLAYING);
+		expect(playGame().type).toBe(actionTypes.GAME_ACTION_PLAYING);
+	});
+	
+	test('game action resume', () => {
+		expect(gameResume().type).toBe(actionTypes.GAME_ACTION_RESUME);
 	});
 });

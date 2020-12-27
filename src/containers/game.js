@@ -40,11 +40,9 @@ const GetProperComponent = (props) => {
 				return <Gameover {...props} />;
 				break;
 			case gameStatus.GAME_STATUS_WIN:
-			console.log('Game win');
 				return <GameWin />;
 				break;
 			case gameStatus.GAME_STATUS_EXIT:
-			console.log('Game win');
 				onConfirmListener();
 				return <Exit />;
 				break;

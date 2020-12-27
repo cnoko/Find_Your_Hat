@@ -7,7 +7,7 @@ const reducer = require('./src/reducer');
 const importJsx = require('import-jsx');
 const GameContainer = importJsx('./src/containers/game');
 const store = createStore(reducer);
-const {exit, resume, gameover, gameWin} = require('./src/actions/game-status');
+const {exit, gameResume, gameover, gameWin} = require('./src/actions/game-status');
 const exitListener = require('./src/listeners/exit');
 //React.context = {'store': store};
 const confirmListener = require('./src/listeners/confirm');
@@ -47,7 +47,7 @@ const mapDispatchToProps = () => {
 		onConfirmListener: () => {
 				useInput((input, key) => {
 					confirmListener(input, () => process.exit(), () => {
-						store.dispatch(resume());
+						store.dispatch(gameResume());
 					});
 				});
 		}
