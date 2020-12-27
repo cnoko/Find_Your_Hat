@@ -3,6 +3,7 @@ const {
 	MOVE_ACTION_DOWN, 
     MOVE_ACTION_LEFT,
     MOVE_ACTION_RIGHT,
+	MOVE_ACTION_SETUP,
     NO_ACTION,
 } = require('../constants/game-move-actions');
 
@@ -12,6 +13,12 @@ const initialState = {
 };
 const moveReducer = function(state = initialState, action) {
 	switch (action.type) {
+		case MOVE_ACTION_SETUP:
+			return {
+				...state,
+				y: action.payload.y,
+				x: action.payload.x
+			};
 		case MOVE_ACTION_UP:
 			return {
 				...state,

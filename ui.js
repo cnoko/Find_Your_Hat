@@ -8,6 +8,7 @@ const importJsx = require('import-jsx');
 const GameContainer = importJsx('./src/containers/game');
 const store = createStore(reducer);
 const {exit, gameResume, gameover, gameWin} = require('./src/actions/game-status');
+const {setupMovement} = require('./src/actions/move');
 const exitListener = require('./src/listeners/exit');
 //React.context = {'store': store};
 const confirmListener = require('./src/listeners/confirm');
@@ -30,6 +31,9 @@ const mapDispatchToProps = () => {
 					store.dispatch(exit());
 				})
 			});
+		},
+		onSetup: (position) => {
+			store.dispatch(setupMovement(position))
 		},
 		onMoveListener: () => {
 			moveListener(useInput, (action) => {
@@ -56,12 +60,12 @@ const mapDispatchToProps = () => {
 
 
 const Game =  connect(mapStateToProps, mapDispatchToProps)(GameContainer);
-const App = ({name = 'Stranger'}) => {
+const App = ({difficulty = 50}) => {
 	
 	 return (
 		<Provider store={store}>
 			<Box Margin={2} display="flex" alignItems="center" flexDirection="column" borderStyle="round">
-				<Game />
+				<Game difficulty={difficulty} />
 			</Box>
 		</Provider>
 	);

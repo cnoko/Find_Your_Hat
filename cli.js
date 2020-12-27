@@ -12,7 +12,7 @@ const cli = meow(`
 	  $ find_your_hat_redux
 
 	Options
-		--name  Your name
+		--difficulty  percent
 
 	Examples
 	  $ find_your_hat_redux --name=Jane

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">96.43% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/23</span>
+                <span class='fraction'>27/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">91.67% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.24% </span>
+                <span class="strong">96.15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/21</span>
+                <span class='fraction'>25/26</span>
             </div>
         
             
@@ -105,7 +105,14 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -124,18 +131,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">198x</span>
-<span class="cline-any cline-yes">114x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">196x</span>
+<span class="cline-any cline-yes">108x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">84x</span>
+<span class="cline-any cline-yes">88x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">200x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">200x</span>
 <span class="cline-any cline-yes">200x</span>
 <span class="cline-any cline-yes">200x</span>
 <span class="cline-any cline-yes">200x</span>
@@ -156,7 +170,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const React = require('react');
 const {Box, Text, useInput} = require('ink');
 &nbsp;
-const {CURRENT_POSITION_COLOR, PATH_COLOR, WALL_COLOR, COLLISION_COLOR} = require('../../constants/colors.js');
+const {CURRENT_POSITION_COLOR, PATH_COLOR, WALL_COLOR, COLLISION_COLOR, DESTINATION_COLOR} = require('../constants/colors.js');
 &nbsp;
 &nbsp;
 class Maze extends React.Component {
@@ -165,30 +179,37 @@ class Maze extends React.Component {
 	}
 	getColor(x, y) {
 		if (this.props.position.x === x &amp;&amp; this.props.position.y === y) {
-			<span class="missing-if-branch" title="if path not taken" >I</span>if (!this.props.grid[x][y]) {
+			<span class="missing-if-branch" title="if path not taken" >I</span>if (this.props.grid[x][y]) {
 <span class="cstat-no" title="statement not covered" >				return COLLISION_COLOR;</span>
 			} else {
 				return CURRENT_POSITION_COLOR;
 			}
 		}
-		if (this.props.grid[x][y]) {
+		if (this.props.destinationPosition.x === x &amp;&amp; this.props.destinationPosition.y === y) {
+			return DESTINATION_COLOR;
+		}
+		if (!this.props.grid[x][y]) {
 			return PATH_COLOR;
 		}
 		
 		return WALL_COLOR;
 	}
+	fill(x, y, cell) {
+		return this.props.filler.getCellCharacter(cell, x, y, this.props.position, this.props.destinationPosition)
+	}
 	
 	render() {
 		const items = [];
-	
-			for (let i = 0; i &lt; this.props.dimenssion; i++) {
+		const {grid, dimenssion} = this.props;
+			for (let i = 0; i &lt; dimenssion; i++) {
 				const line = [];
-				for (let j = 0; j &lt; this.props.dimenssion; j++) {
+				for (let j = 0; j &lt; dimenssion; j++) {
 				const color = this.getColor(j, i);
+				const character = this.fill(j, i, grid[j][i]);
 				const key = `key_${i}_${j}`;
 					line.push(
 						&lt;Box borderStyle="round" width={7} FlexGrow={1} key={key} borderColor={color}&gt;
-							&lt;Text width="100%" backgroundColor={color} alignSelf="center"&gt;{this.props.grid[i][j]}&lt;/Text&gt;
+							&lt;Text width="100%" backgroundColor={color} alignSelf="center"&gt;{character}&lt;/Text&gt;
 						&lt;/Box&gt;
 					);
 				
@@ -208,7 +229,7 @@ module.exports = Maze;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Dec 26 2020 22:39:07 GMT+0000 (Greenwich Mean Time)
+                at Sun Dec 27 2020 12:08:15 GMT+0000 (Greenwich Mean Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

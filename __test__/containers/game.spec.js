@@ -11,6 +11,7 @@ const NotFound = importJsx('../../src/components/not-found');
 const onExitListener    = jest.fn();
 const onMoveListener    = jest.fn();
 const onConfirmListener = jest.fn();
+const onSetup = jest.fn();
 const onGameover = jest.fn();
 const onGameWin = jest.fn();
 const grid = (new Array((new Array(10).fill(0))));
@@ -21,6 +22,7 @@ describe('Test game container', () => {
 		onMoveListener.mockClear();
 		onConfirmListener.mockClear();
 		onGameover.mockClear();
+		onSetup.mockClear();
 		onGameWin.mockClear();
 	})
 	it('listenening', () => {
@@ -31,6 +33,7 @@ describe('Test game container', () => {
 					onConfirmListener={onConfirmListener}
 					onGameover={onGameover}
 					onGameWin={onGameWin}
+					onSetup={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_PLAYING} 
@@ -48,6 +51,7 @@ describe('Test game container', () => {
 					onConfirmListener={onConfirmListener}
 					onGameover={onGameover}
 					onGameWin={onGameWin}
+					onSetup={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_PLAYING} 
@@ -65,6 +69,7 @@ describe('Test game container', () => {
 					onConfirmListener={onConfirmListener}
 					onGameover={onGameover}
 					onGameWin={onGameWin}
+					onSetup={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_OVER} 
@@ -83,6 +88,7 @@ describe('Test game container', () => {
 					onConfirmListener={onConfirmListener}
 					onGameover={onGameover}
 					onGameWin={onGameWin}
+					onSetup={onGameWin}
 					grid={grid}
 					position={position}
 					gameStatus={gameStatus.GAME_STATUS_WIN} 

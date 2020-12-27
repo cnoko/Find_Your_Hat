@@ -1,15 +1,15 @@
 const React = require('react');
 const importJsx = require('import-jsx');
-const Maze = importJsx('../components/game');
-
+const GamePlayer = importJsx('../components/game');
 class MazeGameContainer extends React.Component {
 	constructor(props) {
 		super(props);
+
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		let gameOver = false, shouldUpdate = true;
-		const {dimenssion, position, grid} = nextProps;
+		const {dimenssion, position} = nextProps;
 		if (position.x < 0 || position.y < 0) {
 			gameOver = true;
 			shouldUpdate = false;
@@ -23,12 +23,15 @@ class MazeGameContainer extends React.Component {
 			gameOver = true;
 			shouldUpdate = false;
 		}
-		else if (!grid[position.x][position.y]) {
+		else if (this.props.grid[position.x][position.y]) {
 			gameOver = true;
+		} else if (this.props.destinationPosition.x === position.x && this.props.destinationPosition.y === position.y) {
+			this.props.onGameWin();
 		}
 		
 		if (gameOver) {
 			this.props.onGameover();
+			shouldUpdate= true;
 		}
 		
 		return shouldUpdate;
@@ -36,7 +39,7 @@ class MazeGameContainer extends React.Component {
 	render() {
 		///const {onMoveListener} = this.props;
 		//onMoveListener();
-		return <Maze {...this.props} />;
+		return <GamePlayer {...this.props} />;
 	}
 }
 

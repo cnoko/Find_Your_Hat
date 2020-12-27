@@ -1,12 +1,4 @@
 const React = require('react');
-//const {useInput} = require('ink');
-
-//listeners
-//const quitListener = require('../features/status/quitListener');
-
-//exit reducer
-//const {quit} = require('../features/status/gamestatusSlice')
-
 //all status
 const gameStatus = require('../constants/game-status');
 const importJsx = require('import-jsx');
@@ -17,23 +9,31 @@ const Gameover = importJsx('../components/gameover');
 const Exit = importJsx('../components/exit');
 const NotFound = importJsx('../components/not-found');
 const GameWrapper = importJsx('../containers/maze-container');
-const Maze = require('../../lib/maze-generator');
-const dimenssion = 10;
-const maze = new Maze(dimenssion);
-maze.generateMaze();
-const grid = maze.maze;
+const Field = require('../../lib/field');
+const FieldFiller = require('../../lib/field-filler');
+const field = new Field();
+const filler = new FieldFiller();
+var playing = false;
+
 const GetProperComponent = (props) => {
-	const {onMoveListener, onConfirmListener, position, onGameover, onGameWin} = props;
+	const {onMoveListener, onConfirmListener} = props;
 	switch (props.gameStatus) {
 			case gameStatus.GAME_STATUS_PLAYING:
+				if (!playing) {
+					field.config(props);
+					field.newGame();
+					props.onSetup(field.startPosition);
+					playing = true;
+				}
 				onMoveListener();
 				return (
 					<GameWrapper 
-						onGameover={onGameover} 
-						position={position} 
-						grid={grid} 
-						dimenssion={dimenssion}
-						onGameWin={onGameWin}/>
+						{...props} 
+						filler={filler} 
+						grid={field.grid} 
+						dimenssion={field.dimenssion}
+						destinationPosition={field.endPosition}
+						/>
 				);
 			case gameStatus.GAME_STATUS_OVER:
 
@@ -50,11 +50,10 @@ const GetProperComponent = (props) => {
 				return <NotFound />;
 		}
 }
-
 const GameContainer = (props) => {
 		const {onExitListener} = props;
 		onExitListener();
-		
+
 		return (
 			<React.Fragment>
 				<GetProperComponent {...props} />
