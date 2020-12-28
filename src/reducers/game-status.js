@@ -10,33 +10,42 @@ const gameStatusReducer = (state = initialState, action) => {
 		case actionTypes.GAME_ACTION_PLAYING:
 			return {
 				...state,
-				previousGameStatus: gameStatus.GAME_STATUS_PLAYING,
+				previousGameStatus: state.gameStatus,
 				gameStatus: gameStatus.GAME_STATUS_PLAYING
 			}
+			break;
 		case actionTypes.GAME_ACTION_RESUME:
 			return {
 				...state,
 				previousGameStatus: state.gameStatus,
-				gameStatus: state.previousGameStatus,
+				gameStatus: state.previousGameStatus
+			};
+			break;
+		case actionTypes.GAME_ACTION_EXIT:
+		//BUG FIXED
+			if (state.gameStatus === gameStatus.GAME_STATUS_EXIT && state.previousGameStatus !== state.gameStatus) {
+				return state;
 			}
-		case actionTypes.GAME_ACTION_EXIT: 
 			return {
 				...state,
 				previousGameStatus: state.gameStatus,
 				gameStatus: gameStatus.GAME_STATUS_EXIT,
 			};
+			break;
 		case actionTypes.GAME_ACTION_OVER:
 			return {
 				...state,
 				previousGameStatus: state.gameStatus,
 				gameStatus: gameStatus.GAME_STATUS_OVER
 			};
+			break;
 		case actionTypes.GAME_ACTION_WIN:
 			return {
 				...state,
 				previousGameStatus: state.gameStatus,
 				gameStatus: gameStatus.GAME_STATUS_WIN
 			};
+			break;
 		default:
 			return state;
 	}

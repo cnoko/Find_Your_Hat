@@ -11,6 +11,17 @@ $ npm install --global find_your_hat
 ```
 
 
+## Dependency
+
+```bash
+	ink-react
+	react
+	pathfinding
+	import-jsx
+	ink-redux
+	deepfreeze
+```
+
 ## CLI
 
 ```

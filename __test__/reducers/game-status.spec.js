@@ -16,7 +16,7 @@ describe('Test game status reducer', () => {
 
 		ret = gameStatusReducer(state, {type: actionTypes.GAME_ACTION_PLAYING});
 		expect(ret.gameStatus).toBe(gameStatus.GAME_STATUS_PLAYING);
-		expect(ret.previousGameStatus).toBe(gameStatus.GAME_STATUS_PLAYING);
+		expect(ret.previousGameStatus).toBe(undefined);
 		
 	});
 		
