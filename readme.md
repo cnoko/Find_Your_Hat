@@ -16,6 +16,7 @@ $ npm install --global find_your_hat
 ```bash
 	ink-react
 	react
+	redux
 	pathfinding
 	import-jsx
 	ink-redux
@@ -31,7 +32,7 @@ $ find_your_hat --help
     $ find_your_hat
 
   Options
-    --difficulty Procent 
+    --difficulty Percent 
 
   Examples
     $ find_your_hat --difficulty=100
