@@ -1,7 +1,7 @@
 # Find Your Hat
 
 
-> Project inspired from codecade and 
+> Project inspired from codecade 
 
 
 ## Install
