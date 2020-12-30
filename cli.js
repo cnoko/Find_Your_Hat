@@ -15,8 +15,7 @@ const cli = meow(`
 		--difficulty  percent
 
 	Examples
-	  $ find_your_hat_redux --name=Jane
-	  Hello, Jane
+	  $ find_your_hat_redux --difficulty=100
 `);
 
 render(React.createElement(ui, cli.flags));
